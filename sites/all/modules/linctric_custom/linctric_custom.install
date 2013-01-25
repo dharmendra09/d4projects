@@ -1,0 +1,31 @@
+<?php
+
+/*
+ * Implementation of hook_schema()
+ */
+
+function linctric_custom_schema() {
+  $schema['user_meeting'] = array(
+    'fields' => array(
+      'time' => array(
+        'description' => t('Time.'),
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'city' => array(
+        'description' => t('City/Region to meet other user.'),
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'category' => array(
+        'description' => t('Type of meeting for ex.(tea,breakfast,discussion)'),
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+	  
+    ),
+    
+  );
+  return $schema;
+}
+

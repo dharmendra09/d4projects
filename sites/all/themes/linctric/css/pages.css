@@ -1,0 +1,903 @@
+/**
+ * @file
+ * Page Styling
+ *
+ * Style the markup found in page.tpl.php. Also includes some styling of
+ * miscellaneous Drupal elements that appear in the $content variable, such as
+ * ul.links, .pager, .more-link, etc.
+ */
+
+
+/*
+ * Body
+ */
+ body {
+ background: url("../images/main-bg.jpg") repeat-x scroll left top transparent;
+    color: #626469;
+    font-family: 'LatoRegular';
+    font-size: 14px;
+    margin: 0;
+  
+}
+body.front.logged-in {padding-top:65px !important; background:url(../images/main-bg.jpg) left 65px repeat-x;}
+body.not-front.logged-in {padding-top:65px !important; background:#fff url(../images/main-bg) left 65px repeat-x;}
+
+@font-face {
+    font-family: 'LatoRegular';
+    src: url('lato-regular-webfont.eot');
+    src: url('lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('lato-regular-webfont.woff') format('woff'),
+         url('lato-regular-webfont.ttf') format('truetype'),
+         url('lato-regular-webfont.svg#LatoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'CabinRegular';
+    src: url('cabin-regular-webfont.eot');
+    src: url('cabin-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('cabin-regular-webfont.woff') format('woff'),
+         url('cabin-regular-webfont.ttf') format('truetype'),
+         url('cabin-regular-webfont.svg#CabinRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+@font-face {
+    font-family: 'MyriadProRegular';
+    src: url('myriadpro-regular_0-webfont.eot');
+    src: url('myriadpro-regular_0-webfont.eot?#iefix') format('embedded-opentype'),
+         url('myriadpro-regular_0-webfont.woff') format('woff'),
+         url('myriadpro-regular_0-webfont.ttf') format('truetype'),
+         url('myriadpro-regular_0-webfont.svg#MyriadProRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'MyriadProBold';
+    src: url('myriadpro-bold-webfont.eot');
+    src: url('myriadpro-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('myriadpro-bold-webfont.woff') format('woff'),
+         url('myriadpro-bold-webfont.ttf') format('truetype'),
+         url('myriadpro-bold-webfont.svg#MyriadProBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'MyriadProSemibold';
+    src: url('myriadpro-semibold-webfont.eot');
+    src: url('myriadpro-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('myriadpro-semibold-webfont.woff') format('woff'),
+         url('myriadpro-semibold-webfont.ttf') format('truetype'),
+         url('myriadpro-semibold-webfont.svg#MyriadProSemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'CabinBold';
+    src: url('cabin-bold-webfont.eot');
+    src: url('cabin-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('cabin-bold-webfont.woff') format('woff'),
+         url('cabin-bold-webfont.ttf') format('truetype'),
+         url('cabin-bold-webfont.svg#CabinBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#page {
+  
+}
+
+/*
+ * The skip-link link will be completely hidden until a user tabs to the link.
+ * See the element-focusable rule in system.base.css.
+ */
+
+#skip-link {
+  margin: 0;
+}
+#skip-link a,
+#skip-link a:visited {
+  display: block;
+  width: 100%;
+  padding: 2px 0 3px 0;
+  text-align: center;
+  background-color: #666;
+  color: #fff;
+}
+
+/*
+ * Header
+ */
+
+#header {
+}
+
+#top_part {
+    margin: 0 auto;
+    width: 950px;
+	min-height:139px;
+}
+#logo { /* Wrapping link for logo */
+  float: left; /* LTR */
+  margin: 0;
+  padding: 0;
+}
+#logo img {
+  vertical-align: bottom;
+  float: left;
+  padding: 19px 0 10px;
+  width: 273px;
+}
+
+#name-and-slogan { /* Wrapper for website name and slogan */
+  float: left;
+}
+
+#site-name { /* The name of the website */
+  margin: 0;
+  font-size: 2em;
+  line-height: 1.5em;
+}
+#site-name a:link,
+#site-name a:visited {
+  color: #000;
+  text-decoration: none;
+}
+#site-name a:hover,
+#site-name a:focus {
+  text-decoration: underline;
+}
+
+#site-slogan { /* The slogan (or tagline) of a website */
+  margin: 0;
+  font-size: 1em;
+}
+
+.region-header { /* Wrapper for any blocks placed in the header region */
+  clear: both; /* Clear the logo */
+}
+
+/*
+ * Main (container for everything else)
+ */
+
+#main { padding-top:0px;}
+
+.header {
+    margin: 0 auto;
+    width: 950px;
+}
+/*
+ * Content
+ */
+
+#content {
+    min-height: 375px;
+}
+
+.region-highlighted {
+}
+
+.breadcrumb { /* The path to the current page in the form of a list of links */
+}
+.breadcrumb ol {
+  margin: 0;
+  padding: 0;
+}
+.breadcrumb li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1.title, /* The title of the page */
+h2.node-title, /* Title of a piece of content when it is given in a list of content */
+h2.block-title, /* Block title */
+h2.title, /* Comment section heading */
+h2.comment-form, /* Comment form heading */
+h3.title { /* Comment title */
+  margin: 0;
+}
+
+tr.even { /* Some tables have rows marked even or odd. */
+  /* background-color: #eee; */ /* Drupal core uses a #eee background */
+}
+
+tr.odd {
+  /* background-color: #eee; */ /* Drupal core uses a #eee background */
+}
+
+div.messages { /* Important messages (status, warning, and error) for the user. See also the declarations in messages.css. */
+  margin: 1.5em 0; /* Drupal core uses "6px 0" margin */
+}
+div.messages ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+div.status { /* Normal priority messages */
+}
+
+div.warning,
+tr.warning { /* Medium priority messages */
+  /* border: 1px solid #f0c020; */ /* Drupal core uses: 1px solid #f0c020 */
+}
+
+div.error,
+tr.error { /* High priority messages. See also the .error declaration below. */
+}
+
+.error { /* Errors that are separate from div.messages status messages. */
+  /* color: #e55; */ /* Drupal core uses a #e55 background */
+}
+
+.warning { /* Warnings that are separate from div.messages status messages. */
+  /* color: #e09010; */ /* Drupal core uses a #e09010 background */
+}
+
+.tabs { /* See also the tabs.css file. */
+}
+
+.region-help { /* Help text on a page */
+}
+
+.more-help-link { /* Link to more help */
+}
+
+.region-content { /* Wrapper for the actual page content */
+}
+
+ul.inline { /* List of links generated by theme_links() */
+  display: inline;
+  padding: 0;
+}
+ul.inline li {
+  display: inline;
+  list-style-type: none;
+  padding: 0 1em 0 0; /* LTR */
+}
+
+span.field-label { /* The inline field label used by the Fences module */
+  padding: 0 1em 0 0; /* LTR */
+}
+
+.item-list .pager { /* A list of page numbers when more than 1 page of content is available */
+  padding: 0;
+}
+.item-list .pager li { /* Each page number in the pager list */
+  padding: 0 0.5em;
+}
+
+.feed-icon { /* The link to the RSS or Atom feed for the current list of content */
+}
+
+.more-link { /* Aggregator, blog, and forum more link */
+}
+
+/*
+ * First sidebar (on left in LTR languages, on right in RTL)
+ *
+ * Remember to NOT add padding or margin to your .region-sidebar-first
+ * (see the layout.css file.)
+ */
+
+.region-sidebar-first {
+}
+
+/*
+ * Second sidebar (on right in LTR languages, on left in RTL)
+ *
+ * Remember to NOT add padding or margin to your .region-sidebar-second
+ * (see the layout.css file.)
+ */
+
+.region-sidebar-second {
+}
+
+/*
+ * Footer
+ */
+
+#footer {
+}
+
+/*
+ * Page bottom
+ */
+
+.region-bottom { /* Wrapper for any blocks placed in the page bottom region */
+}
+h1, h2, h3, h4, h5, h6 {
+     font-weight: normal;
+}
+.header-banner {
+    float: left;
+    width: 950px;
+}
+.header-left {
+    float: left;
+    padding: 30px 0 0 81px;
+    width: 232px;
+}
+.header-right-banner {
+    float: right;
+    width: 635px;
+    height:376px;
+}
+.sign-up1 {
+    float: left;
+    width: 232px;
+}
+h1 {
+    color: #464646;
+    font-family: 'LatoRegular';
+    font-size: 21px;
+    margin:0;
+    line-height:26px;
+}
+.sign-up1-content {
+    color: #000000;
+    float: left;
+    font-family: 'LatoRegular';
+    font-size: 11px;
+    line-height: 12px;
+    padding: 0;
+    width: 190px;
+}
+.sign-up1-green-arrow {
+    float: left;
+    padding: 6px 0 3px;
+    text-align: center;
+    width: 180px;
+    height:14px;
+    line-height:18px;
+}
+h2 {
+    color: #000000;
+    font-family: 'CabinRegular';
+    font-size: 27px;
+    padding: 20px 0 0 0;
+    margin:0;
+    line-height:34px;
+}
+.red {
+    color: #DF001C;
+    font-family: 'CabinBold';
+}
+.how-it-work-box {
+    float: left;
+    padding:21px 0 0 82px;
+    width: 360px;
+    margin-bottom: 43px;
+}
+.how-it-work-ti {
+    float: left;
+    width: 360px;
+}
+.how-it-work-normal-text {
+    color: #636363;
+    float: left;
+    font-family: 'CabinRegular';
+    font-size: 12px;
+    line-height: 17px;
+    padding: 1px 0 0;
+    text-align: justify;
+    width: 320px;
+}
+.images2 {
+    float: left;
+    margin: 0;
+    padding: 0 10px 0 0;
+}
+h3 {
+    color: #707070;
+    font-family: 'CabinRegular';
+    font-size: 21px;
+    margin:0 0 0 10px;
+    padding:9px 0 0 10px;
+    line-height:26px;
+}
+.more-link {
+    color: #DF001B;
+    float: left;
+    font-family: 'CabinBold';
+    font-size: 12px;
+    padding: 2px 0 0;
+    text-transform: uppercase;
+    width: 320px;
+    text-align:left;
+}
+.more-link a {
+    color: #DF001B;
+    text-decoration: none;
+}
+
+a {
+    outline: 0 none;
+}
+.testimonials {
+    margin: 0 auto;
+    width: 950px;
+}
+.testimonials-ti {
+    color: #000000;
+    float: left;
+    font-family: 'CabinRegular';
+    font-size: 27px;
+    padding:21px 0 21px 8px;
+}
+.testimonials-img {
+    float: right;
+    padding-left:13px;
+    padding-top:2px;
+    width: 26px;
+}
+.testimonials-left {
+    float: left;
+     padding: 36px 0 33px 82px;
+    width: 360px;
+}
+.testimonials-normal-text {
+    color: #636363;
+    float: left;
+    font-family: 'MyriadProRegular';
+    font-size: 18px;
+    line-height: 22px;
+    text-align: justify;
+    width: 360px;
+    height:70px;
+}
+.testimonials-comment {
+    color: #B7B7B7;
+    float: left;
+    font-family: 'MyriadProRegular';
+    font-size: 16px;
+    padding: 0;
+    text-align: right;
+    width: 360px;
+}
+#footer-main {
+    background: url("../images/footer-red-bg.jpg") repeat-x scroll left top #B93F3A;
+    float: left;
+    padding: 23px 0 0;
+    width: 100%;
+}
+.footer {
+    margin: 0 auto;
+    width: 950px;
+}
+.top-right-icon {
+    float: right;
+    padding: 6px 0 0;
+    width: 120px;
+}
+.top-icon-1 {
+    float: left;
+    padding: 0 3px 0 0;
+    width: 27px;
+}
+.top-right {
+    float: right;
+    width: 421px;
+}
+
+#header_banner_center{ margin: 0 auto; width:950px;}
+#testimonial_full{
+    background: url("../images/testimonials-line-bg.png") repeat-x scroll left top #ECECEC;
+    float: left;
+    width: 100%;
+
+
+}
+.footer-about {
+    background: url("../images/footer-line.png") repeat-y scroll right top transparent;
+    float: left;
+    padding-left: 10px;
+    width: 150px;
+}
+h4 {
+    color: #000000;
+    font-family: 'CabinRegular';
+    font-size: 24px;
+    margin: 0;
+	line-height:30px;
+}
+.footer-about-link {
+    float: left;
+    padding: 5px 0 0;
+    width: 150px;
+}
+.footer-about-link ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.footer-about-link ul li {
+    color: #FFFFFF;
+    display: block;
+    font-family: 'CabinRegular';
+    font-size: 14px;
+    padding: 0 0 6px;
+}
+.footer-about-link ul li a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.footer-services {
+    background: url("../images/footer-line.png") repeat-y scroll right top transparent;
+    float: left;
+    padding: 0 0 0 28px;
+    width: 155px;
+}
+.footer-services-link {
+    float: left;
+    padding: 5px 0 0;
+    width: 132px;
+}
+.footer-community-link {
+    float: left;
+    padding: 5px 0 0;
+    width: 160px;
+}
+.footer-services-link ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.footer-services-link ul li {
+    color: #FFFFFF;
+    display: block;
+    font-family: 'CabinRegular';
+    font-size: 14px;
+    padding: 0 0 6px;
+}
+.footer-services-link ul li a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+a {
+    outline: 0 none;
+    color: #464646;
+    text-decoration: none;
+}
+.footer-community {
+    background: url("../images/footer-line.png") repeat-y scroll right top transparent;
+    float: left;
+    padding: 0 0 0 32px;
+    width: 180px;
+}
+.footer-community-link ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.footer-community-link ul li {
+    color: #FFFFFF;
+    display: block;
+    font-family: 'CabinRegular';
+    font-size: 14px;
+    padding: 0 0 6px;
+}
+.footer-community-link ul li a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.footer-our-partners {
+    float: left;
+    padding: 0 0 0 23px;
+    width: 173px;
+}
+.footer-icon {
+    float: left;
+    padding: 14px 0 0;
+    width: 154px;
+}
+.footer-icon1 {
+    float: left;
+    width: 71px;
+}
+.footer-icon2 {
+    float: right;
+    width: 45px;
+}
+
+#get_connected {
+      background: url("../images/get-connected-grad.jpg") repeat-x scroll left top transparent;
+
+}
+.copyright {
+    color: #434343;
+    float: left;
+    font-family: 'CabinRegular';
+    font-size: 13px;
+    padding: 18px 0 18px 10px;
+    width: 940px;
+}
+#footer_menu{
+    background: url("../images/footer-red-bg.jpg") repeat-x scroll left top #B93F3A;
+    float: left;
+    padding: 23px 0 0;
+    width: 100%;
+}
+#footer_center, #get_connected_center{
+    margin:0 auto;
+    width: 950px;
+}
+.sign-up {
+    float: left;
+    width: 199px;
+}
+.sign-up-but {
+    float: left;
+    padding: 18px 0 20px;
+    width: 217px;
+}
+.images {
+    float: left;
+    margin: 0;
+    padding: 0;
+	height:21px;
+}
+
+.sign-up-input {
+    background: url("../images/sign-up-grad.png") repeat-x scroll left top transparent;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: pointer;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 0 10px;
+    text-align: center;
+    width: 199px;
+}
+.get-connected-box {
+  margin:0;
+ }
+ #block-block-1 {
+   width : 400px;
+   float:right;
+ }
+.front #page-title {display:none;}
+
+.black-line {
+    float: left;
+    width: 950px;
+}
+.search-main {
+    float: right;
+    padding: 6px 0 7px;
+    width: 288px;
+}
+.combo-box {
+    float: left;
+    width: 77px;
+}
+.cc-ddl {
+    color: #616161;
+    width: 77px;
+}
+.cc-ddl-o {
+    display: none;
+}
+.cc-ddl .cc-ddl-header {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #DCDCDC;
+    border-color: #C9C9C9 -moz-use-text-color #C9C9C9 #C9C9C9;
+    border-radius: 3px 0 0 3px;
+    border-style: solid none solid solid;
+    border-width: 1px medium 1px 1px;
+    line-height: 19px;
+    margin-right: -2px;
+    padding: 0 0 0 3px;
+    position: relative;
+}
+.search-but-input {
+    background: url("../images/search-but.jpg") no-repeat scroll left top transparent;
+    border: 0 none;
+    color: #689B67;
+    cursor: pointer;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    height: 22px;
+    text-indent: 99px;
+    width: 22px;
+}
+.cc-ddl-title {
+    background: url("../images/arrow.png") no-repeat scroll 61px 8px transparent;
+    width: 100%;
+}
+.text-filde-input {
+    background: url("../images/text-filde-bg.jpg") repeat-x scroll left top transparent;
+    border: 0 none;
+    color: #ACACAC;
+    float: left;
+    font-family: 'CabinRegular';
+    font-size: 12px;
+    padding: 2px 0 5px 5px;
+    width: 169px;
+}
+.search-but {
+    float: left;
+    padding: 0 0 0 5px;
+    width: 22px;
+}
+.cc-ddl-contents {
+    background-color: #DCDCDC;
+    border: 1px solid #A9A9A9;
+    height: 145px;
+    margin-top: -4px;
+    position: absolute;
+    width: 75px;
+}
+.cc-ddl-contents a {
+    color: #616161;
+    display: block;
+    padding: 6px;
+    text-decoration: none;
+}
+#content {
+  margin: 0 auto;
+  width:950px;
+}
+.node-4 p { width:275px;}
+.webform-node-cancel {
+  position: relative;
+  margin-left: 70px;
+}
+#header, #content, #navigation, .region-sidebar-first, .region-sidebar-second, #footer{ padding-left:0px; padding-right:0px;}
+#block-block-12, block-block-14{ margin:0px;}
+#webform-client-form-4 {
+	float: right;
+    margin-top:-1px;
+    width: 400px;
+}
+#webform-client-form-4 .form-item{
+	float: left;
+    padding: 0 0 10px;
+    width: 400px;
+	margin:0;
+}
+#webform-client-form-4 .form-item label{
+    color: #333333;
+    float: left;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 0 2px 2px;
+    width: 400px;
+}
+#webform-client-form-4 .form-item input{
+    border: 1px dotted #CCCCCC;
+    color: #999999;
+    font-family: Arial;
+    font-size: 12px;
+    padding: 5px 0 5px 5px;
+    width: 350px;
+}
+#webform-client-form-4 .form-item textarea{
+    border: 1px dotted #CCCCCC;
+    color: #999999;
+    font-family: Arial;
+    font-size: 12px;
+    padding: 5px 0 5px 5px;
+    width: 357px;
+	resize:none;
+	height:75px;
+}
+#webform-client-form-4 .form-item .form-textarea-wrapper{
+	float:left;
+}
+
+.subscribeNowBTN1{padding:0px; margin-right:10px; float:left; width:auto;}
+#webform-client-form-4 .form-wrapper, .webform-node-cancel{ background:url(../images/sign-up-left-corn1.png) no-repeat left top; float:left; margin:0 10px 10px 0;}
+#edit-custom-cancel { background:url(../images/sign-up-left-corn1.png) no-repeat left top; float:left; margin:0 10px 10px 0;}
+#webform-client-form-4 input.form-submit, .webform-node-cancel .form-submit{ background:url(../images/sign-up-right-corn1.png) no-repeat right top; color:#ffffff; font-size:12px; font-family:Arial, Helvetica, sans-serif; border:none; margin:0px 0px 0px 8px; padding:7px 8px 8px 0;  padding:9px 8px 8px 0\9; cursor:pointer; float:left; width:auto; display:block; overflow:visible; font-weight:normal; text-transform:uppercase;}
+#webform-client-form-4 .form-text, .form-textarea {border: 1px dotted #cccccc; padding: 5px 0 5px 5px;}
+.region-footer-menu .block{ margin:0px;}
+#search-block-form{ float: left; text-align: right; width: 950px; margin-top: 6px;}
+#block-block-2, #block-block-3, #block-block-13{ margin:0;}
+.region-front-middle-center .block{ margin:0;}
+.region-front-middle-bottom{ clear:both;}
+.region-front-middle-bottom .block{ margin:0;}
+#search-block-form .form-submit {  background: url("../images/search-but.jpg") no-repeat scroll left top transparent;
+    border: 0 none;
+    color: #689B67;
+    cursor: pointer;
+    float: right;
+    height: 22px;
+    text-indent: 99px;
+    width: 22px;
+    margin-left:10px;}
+#search-block-form .form-text{
+    background: url("../images/text-filde-bg.jpg") repeat-x scroll left top transparent;
+    border: 0 none;
+    color: #ACACAC;
+    font-family: 'CabinRegular';
+    font-size: 12px;
+    padding: 2px 0 5px 5px;
+    width: 169px;
+}
+#block-search-form{ margin:0;}
+.contact-logo-bg {
+    float: left;
+    padding:200px 0 0 83px;
+    width: 440px;
+	text-align:center;
+}
+.not-front #content{ padding:15px 0px 15px 10px;}
+.section-contact-us .node-webform header, .section-contact-us .node-webform .submitted{ display:none;}
+.section-contact-us .breadcrumb{ display:none;}
+.not-front #content h1#page-title{ font-size:25px; line-height:32px;}
+
+.view-testimonials .views-row {float: left; padding: 10px 0 33px 82px; width: 360px;}
+.view-events .views-row {border: 2px solid #CCCCCC; padding: 0 10px 10px 10px; margin-top:5px; border-radius: 10px;} 
+.view-events .views-row .node-title a { text-decoration:none; }
+.view-events-calendar .views-row a { text-decoration:none; }
+.view-events-calendar .views-row { margin-top:10px; }
+.node-event a { color:#464646;}
+.node-event .node-readmore a {color:#DF001B; text-decoration:none;}
+.node-event .node-readmore a:hover {text-decoration:underline;}
+.view-events-calendar .views-row a { color:#464646;}
+.view-events-calendar .views-row a:hover { color:#CF0001;}
+.view-upcoming-events .views-row a { color:#464646; text-decoration:none;}
+.upcoming-events-list-page .views-row a {font-weight:bold;}
+.view-display-id-page .views-row .views-field-field-event-date { margin-left:10px;}
+.view-upcoming-events .views-row a:hover { color:#CF0001;}
+.view-upcoming-events .views-row { margin-top:10px;}
+.node-event a:hover{ color:#CF0001;}
+.region-sidebar-second {padding: 0 0 0 10px;}
+.view-display-id-block_1 {border:2px solid #CCCCCC; padding: 0 10px 10px 10px; border-radius:10px; }
+.upcoming-events-list {border:2px solid #CCCCCC; padding: 0 10px 10px 10px; border-radius:10px; height:180px; }
+.view-upcoming-events {border:2px solid #CCCCCC; padding: 0 10px 10px 10px; border-radius:10px; }
+
+.view-events .node-readmore{float:right;}
+#blocks_links li a:hover { color:#cccccc;}
+
+.section-member-services #blocks_links .services_member a {color:#111111;}
+.section-customer-support #blocks_links .services_support a {color:#111111;}
+.section-how-it-works #blocks_links .about_howitworks a {color:#111111;}
+.section-our-company #blocks_links .about_company a {color:#111111;}
+.section-our-capabilities #blocks_links .about_capabilities a {color:#111111;}
+.section-our-services #blocks_links .about_services a {color:#111111;}
+.section-our-members #blocks_links .community_members a {color:#111111;}
+.section-what-our-customer-say #blocks_links .community_customer_say a {color:#111111;}
+.section-blog #blocks_links .community_blog a {color:#111111;}
+.section-press #blocks_links .community_press a {color:#111111;}
+.section-contact-us #blocks_links .connect_contactus a {color:#111111;}
+.section-about-linctric #blocks_links .connect_linctric a {color:#111111;}
+.section-terms-use #blocks_links .connect_terms a {color:#111111;}
+.section-privacy-policy #blocks_links .connect_privacy a {color:#111111;}
+.node-blog ul a {color:#DF001B; text-decoration:none;}
+.node-blog a {text-decoration:none;}
+
+.form-field-type-user-reference {display:none;}
+
+
+

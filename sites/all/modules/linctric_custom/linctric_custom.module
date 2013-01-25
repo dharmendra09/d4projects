@@ -1,0 +1,159 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_init().
+ */
+function linctric_custom_init() {
+  global $user;
+  drupal_add_js(array('currentUser' => $user->uid), 'setting');
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function linctric_custom_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == "webform_client_form_4") {
+  $form['cancel']=array('#type'=>'submit',
+                        '#prefix' => '<div class="webform-node-cancel">',
+                        '#value'=>'Cancel',
+                        '#weight'=>1500,
+                        '#suffix' => '</div>',
+                        );
+  }
+
+  if ($form_id == 'search_block_form') {
+    $form['search_block_form']['#title'] = t('Search'); // Change the text on the label element
+    $form['search_block_form']['#title_display'] = 'invisible'; // Toggle label visibilty
+    $form['search_block_form']['#default_value'] = t('Type Your Search...'); // Set a default value for the textfield
+    $form['search_block_form']['#attributes']['onblur'] = "if (this.value == '') {this.value = 'Type Your Search...';}";
+    $form['search_block_form']['#attributes']['onfocus'] = "if (this.value == 'Type Your Search...') {this.value = '';}";
+    $form['#attributes']['onsubmit'] = "if(this.search_block_form.value=='Type Your Search...'){ alert('Please enter a search value'); return false; }";
+  }
+  
+  if ($form_id == 'user_register_form') {
+    if (isset($_REQUEST['user_roles'])) {
+      if ($_REQUEST['user_roles'] == '7') {
+        $form['#submit'][] = 'linctric_user_register_form_submit_handler';
+      }
+      if ($_REQUEST['user_roles'] == '6') {
+        $form['#submit'][] = 'linctric_user_register_form_submit_handler1';
+      }
+    }
+  }
+  
+  if($form_id == 'user_meeting_node_form'){
+            
+    $node_id = $form['nid']['#value'];
+    $form_action = $form['#action'];
+       
+    if($form_action == '/node/'.$node_id.'/edit?destination=admin/content' || $form_action == '/node/'.$node_id.'/edit' ){
+      $form['#entity']->field_meeting_date['und'][0]['value'];
+    }
+    elseif($form_action == '/node/add/user-meeting'){}
+    else{
+    $selected_date = $_REQUEST['date'];
+      $form['field_meeting_date']['und'][0]['#default_value']['value'] = $selected_date;
+    }
+    $form['additional_settings']['#access'] = FALSE;
+    $form['actions']['preview']['#access'] = FALSE;
+    $form['#validate'][] = 'linctric_custom_user_meeting_node_form_validate';
+    $form['actions']['submit']['#submit'][] = 'linctric_custom_submit_handler';
+  }    
+}
+function linctric_custom_user_meeting_node_form_validate($form, &$form_state){
+   
+   $region_value = $form_state['values']['field_city_region']['und'][0]['value'];
+   $category_value = $form_state['values']['field_category']['und'][0]['value'];
+   $meeting_time = $form_state['values']['field_meeting_time']['und'][0]['value'];
+   $errors = form_get_errors();
+
+   if($errors) {
+     drupal_goto($_SERVER['HTTP_REFERER']);
+   }
+}
+
+function linctric_custom_submit_handler(&$form, &$form_state) {
+      
+  $browser_path = $_SERVER['HTTP_REFERER'];
+  $path_params = parse_url($_SERVER['HTTP_REFERER']);
+  $arg_path = $path_params['path'];
+  $user_id = substr($arg_path,6);
+  $parts = explode("/",$user_id);
+  $final_id = $parts['0'];
+  
+  $user = user_load($final_id);
+  $username_url = $user->name;
+  $user_email = $user->mail;
+  $meeting_date = $form_state['values']['field_meeting_date']['und'][0]['value'];
+  $meeting_time = $form_state['values']['field_meeting_time']['und'][0]['value'];
+  $region_value = $form_state['values']['field_city_region']['und'][0]['value'];
+  $category_value = $form_state['values']['field_category']['und'][0]['value'];
+  
+  global $user;
+  $loggedin_user_email = $user->mail;
+  $loggedin_user_name = $user->name;
+  $site_email = variable_get('site_mail', '');
+  
+  /*Mail Sending Code */
+  
+  $to      = $user_email ;
+  $subject = 'Mail regarding User connection';
+  $message = 'Hello '.$username_url.','."\n". 
+             $loggedin_user_name.' has sent you a request in your calendar for meeting, the datail information is as follows,'."\n\n".
+             'Meeting Date : '.$meeting_date."\n".
+             'Meeting Time : '.$meeting_time.' o\'clock'."\n".
+             'Category : '.$category_value."\n".
+             'City/Region : '.$region_value."\n\n\n". 
+             'Thanks & Regards'."\n".
+             'Linctric team';
+  $from = $site_email;
+  $headers = "From:" . $from;
+      
+  mail($to, $subject, $message, $headers);
+  
+  $form_state['redirect'] = $_SERVER['HTTP_REFERER'];
+  
+  drupal_set_message('E-mail has been sent successfully');
+}
+
+function linctric_user_register_form_submit_handler($form, &$form_state) {
+  $form_state['redirect'] = 'node/23';
+}
+
+function linctric_user_register_form_submit_handler1($form, &$form_state) {
+  $form_state['redirect'] = 'node/24';
+}
+
+function linctric_custom_email($item,$meeting_date_response){
+  global $user;
+  $req_user_id = $item->node->uid;
+  $req_user = user_load($req_user_id);
+  $req_user_name = $req_user->name;
+  $req_user_email = $req_user->mail;
+  $logged_user_name = $user->name;
+  $site_email = variable_get('site_mail', '');
+       
+  if(isset($_POST['button_pressed']) && $_POST['button_pressed'] == $meeting_date_response){
+         
+  /* E-mail Code */
+  $to      = $req_user_email;
+  $subject = 'Regarding Your Request';
+  if(isset($_POST['decline_pressed'])){
+  $message = 'Hello '.$req_user_name.' '.$logged_user_name .' has not accepted your request for date '.$meeting_date_response."\n".
+             'Thanks & Regards'."\n".
+             'Linctric team';
+  }else{
+  $message = 'Hello '.$req_user_name.' '.$logged_user_name .' has accepted your request for date '.$meeting_date_response."\n".
+             'Thanks & Regards,'."\n".
+             'Linctric team.';
+  }
+  $from =  $site_email;
+  $headers = "From:" . $from;
+  
+  mail($to, $subject, $message, $headers);
+  }
+}
