@@ -31,7 +31,7 @@ $(document).ready(function() {
        }
      }
    });
-   
+  
    $(".ui-dialog-titlebar-close").click(function(){
      window.location.reload(true);
     });
