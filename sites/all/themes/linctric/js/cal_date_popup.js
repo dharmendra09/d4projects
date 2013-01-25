@@ -23,7 +23,6 @@ $(document).ready(function() {
       alert("You can not send request to own"); 
       return false;
     }else{
-     var todays_date = $('.view-display-id-page_1 .today').attr('data-date');
      var date = $(this).attr('data-date');
     
        if(date >= current_date){
