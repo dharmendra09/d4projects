@@ -12,7 +12,10 @@ $(document).ready(function() {
   var pathArray = window.location.pathname.split( '/' );
   var urlId = pathArray[2];
   var uid = Drupal.settings.currentUser;
-        
+  
+  $("td.past #request_accept_form #button_accept").attr("disabled","disabled");
+  $("td.past #request_accept_form #button_denied").attr("disabled","disabled");
+  
   $(".view-per-user-calendar .date-box td").hover(function(){
     $('.view-per-user-calendar .date-box .inner .day').css( 'cursor', 'pointer' );
   });
@@ -48,13 +51,13 @@ $(document).ready(function() {
               
        if($('#edit-field-city-region-und-0-value').val() == ''){
        
-       alert("please enter region value");
+       alert("Please Enter Region Value");
        $('#edit-field-city-region-und-0-value').focus();
        return false;
        }
        if($('#edit-field-category-und-0-value').val() == ''){
        
-       alert("please enter Catagory value");
+       alert("Please Enter Catagory Value");
        $('#edit-field-category-und-0-value').focus();
        return false;
        }
