@@ -1,8 +1,5 @@
 <?php
 
-global $global_messages;   
-$global_messages = $messages;
-print $global_messages;
 print render($page['content']); 
 if(isset($_SERVER['HTTP_REFERER'])) {
   $browser_path = $_SERVER['HTTP_REFERER'];
