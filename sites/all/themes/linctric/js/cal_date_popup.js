@@ -10,7 +10,7 @@ $(document).ready(function() {
     (day<10 ? '0' : '') + day;
   
   var pathArray = window.location.pathname.split( '/' );
-  var urlId = pathArray[2];
+  var urlId = pathArray[3];
   var uid = Drupal.settings.currentUser;
   
   $("td.past #request_accept_form #button_accept").attr("disabled","disabled");
@@ -30,7 +30,7 @@ $(document).ready(function() {
     
        if(date >= current_date){
          $( "#dialog-form" ).dialog( "open" );
-         $( '#dialog-form' ).load('/node/add/user-meeting?date='+date);
+         $( '#dialog-form' ).load('/linctric/node/add/user-meeting?date='+date);
        }
      }
    });
