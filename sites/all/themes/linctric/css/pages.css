@@ -20,7 +20,7 @@
   
 }
 body.front.logged-in {padding-top:65px !important; background:url(../images/main-bg.jpg) left 65px repeat-x;}
-body.not-front.logged-in {padding-top:65px !important; background:#fff url(../images/main-bg) left 65px repeat-x;}
+body.not-front.logged-in {padding-top:65px !important; background:#fff url(../images/main-bg.jpg) left 65px repeat-x;}
 
 @font-face {
     font-family: 'LatoRegular';
