@@ -81,7 +81,7 @@ function linctric_custom_submit_handler(&$form, &$form_state) {
   $browser_path = $_SERVER['HTTP_REFERER'];
   $path_params = parse_url($_SERVER['HTTP_REFERER']);
   $arg_path = $path_params['path'];
-  $user_id = substr($arg_path,6);
+  $user_id = substr($arg_path,15);
   $parts = explode("/",$user_id);
   $final_id = $parts['0'];
   

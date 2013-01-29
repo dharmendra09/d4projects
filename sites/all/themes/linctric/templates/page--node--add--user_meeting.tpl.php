@@ -5,7 +5,7 @@ if(isset($_SERVER['HTTP_REFERER'])) {
   $browser_path = $_SERVER['HTTP_REFERER'];
   $path_params = parse_url($_SERVER['HTTP_REFERER']);
   $arg_path = $path_params['path'];
-  $user_id = substr($arg_path,6,2);
+  $user_id = substr($arg_path,15,2);
   $user = user_load($user_id);
   $username_url = $user->name;
 }
