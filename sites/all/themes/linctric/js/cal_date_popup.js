@@ -11,6 +11,7 @@ $(document).ready(function() {
   
   var pathArray = window.location.pathname.split( '/' );
   var urlId = pathArray[3];
+  
   var uid = Drupal.settings.currentUser;
   
   $("td.past #request_accept_form #button_accept").attr("disabled","disabled");

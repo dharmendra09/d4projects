@@ -83,7 +83,7 @@ stylesheets[all][] = css/jquery-ui.css
 scripts[] = js/jquery-1.4.4.min.js
 scripts[] = js/ccvalidate.js
 scripts[] = js/custom.js
-scripts[] = js/jquery-1.8.2.js
+
 scripts[] = js/jquery-ui.js
 scripts[] = js/cal_date_popup.js
 

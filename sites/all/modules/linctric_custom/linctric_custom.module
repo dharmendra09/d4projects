@@ -25,7 +25,7 @@ function linctric_custom_form_alter(&$form, &$form_state, $form_id) {
                         );
   }
 
-  if ($form_id == 'search_block_form') {
+  if($form_id == 'search_block_form') {
     $form['search_block_form']['#title'] = t('Search'); // Change the text on the label element
     $form['search_block_form']['#title_display'] = 'invisible'; // Toggle label visibilty
     $form['search_block_form']['#default_value'] = t('Type Your Search...'); // Set a default value for the textfield
@@ -50,30 +50,28 @@ function linctric_custom_form_alter(&$form, &$form_state, $form_id) {
     $node_id = $form['nid']['#value'];
     $form_action = $form['#action'];
        
-    if($form_action == '/node/'.$node_id.'/edit?destination=admin/content' || $form_action == '/node/'.$node_id.'/edit' ){
+  if($form_action == '/node/'.$node_id.'/edit?destination=admin/content' || $form_action == '/node/'.$node_id.'/edit' ){
       $form['#entity']->field_meeting_date['und'][0]['value'];
-    }
-    elseif($form_action == '/node/add/user-meeting'){}
-    else{
-    $selected_date = $_REQUEST['date'];
-      $form['field_meeting_date']['und'][0]['#default_value']['value'] = $selected_date;
-    }
-    $form['additional_settings']['#access'] = FALSE;
-    $form['actions']['preview']['#access'] = FALSE;
-    $form['#validate'][] = 'linctric_custom_user_meeting_node_form_validate';
-    $form['actions']['submit']['#submit'][] = 'linctric_custom_submit_handler';
-  }    
+  }
+  elseif($form_action == '/node/add/user-meeting'){}
+  else{
+  $selected_date = $_REQUEST['date'];
+    $form['field_meeting_date']['und'][0]['#default_value']['value'] = $selected_date;
+  }
+  
+  $form['additional_settings']['#access'] = FALSE;
+  $form['actions']['preview']['#access'] = FALSE;
+  $form['#validate'][] = 'linctric_custom_user_meeting_node_form_validate';
+  $form['actions']['submit']['#submit'][] = 'linctric_custom_submit_handler';
+  
+  }
 }
+
 function linctric_custom_user_meeting_node_form_validate($form, &$form_state){
    
    $region_value = $form_state['values']['field_city_region']['und'][0]['value'];
    $category_value = $form_state['values']['field_category']['und'][0]['value'];
    $meeting_time = $form_state['values']['field_meeting_time']['und'][0]['value'];
-   $errors = form_get_errors();
-
-   if($errors) {
-     drupal_goto($_SERVER['HTTP_REFERER']);
-   }
 }
 
 function linctric_custom_submit_handler(&$form, &$form_state) {
@@ -118,14 +116,6 @@ function linctric_custom_submit_handler(&$form, &$form_state) {
   $form_state['redirect'] = $_SERVER['HTTP_REFERER'];
   
   drupal_set_message('E-mail has been sent successfully');
-}
-
-function linctric_user_register_form_submit_handler($form, &$form_state) {
-  $form_state['redirect'] = 'node/23';
-}
-
-function linctric_user_register_form_submit_handler1($form, &$form_state) {
-  $form_state['redirect'] = 'node/24';
 }
 
 function linctric_custom_email($item,$meeting_date_response){
