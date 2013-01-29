@@ -52,15 +52,17 @@ $index = 0;
         <?php print $field; ?>
       <?php endforeach; ?>
       <?php
-      $selecteduser = arg(1);
+      
  
+  if(arg(2) == "calendar" && arg(3) == "month") { 
+  $selecteduser = arg(1);
   global $user;
   
   $current_user = $user->uid;
   $current_user_mail = $user->mail;
   $site_email = variable_get('site_mail', '');
-  $meeting_date_response = $item->node->field_meeting_date['und'][0]['value'];    
-   if($current_user && $current_user == $selecteduser ){   ?>
+  $meeting_date_response = $item->node->field_meeting_date['und'][0]['value'];
+  if($current_user && $current_user == $selecteduser ){   ?>
    
     <form action="" method="post" id="request_accept_form" >
       <input type="submit" id="button_accept" value="Accept"></input>
@@ -71,7 +73,9 @@ $index = 0;
   
   <?php
     linctric_custom_email($item,$meeting_date_response);
+  }  
   ?> 
+    
   </div>  
   <?php if (isset($item->continues) && $item->continues) : ?>
     <div class="continues">&raquo;</div>
