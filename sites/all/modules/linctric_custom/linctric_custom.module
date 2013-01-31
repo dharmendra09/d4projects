@@ -49,10 +49,10 @@ function linctric_custom_form_alter(&$form, &$form_state, $form_id) {
     $node_id = $form['nid']['#value'];
     $form_action = $form['#action'];
        
-    if($form_action == '/node/'.$node_id.'/edit?destination=admin/content' || $form_action == '/node/'.$node_id.'/edit' ){
+    if($form_action == '/linctric/node/'.$node_id.'/edit?destination=admin/content' || $form_action == '/linctric/node/'.$node_id.'/edit' ){
       $form['#entity']->field_meeting_date['und'][0]['value'];
     }
-    elseif($form_action == '/node/add/user-meeting'){}
+    elseif($form_action == '/linctric/node/add/user-meeting'){}
     else{
       $selected_date = $_REQUEST['date'];
       $form['field_meeting_date']['und'][0]['#default_value']['value'] = $selected_date;
@@ -81,7 +81,7 @@ function linctric_custom_submit_handler(&$form, &$form_state) {
   $browser_path = $_SERVER['HTTP_REFERER'];
   $path_params = parse_url($_SERVER['HTTP_REFERER']);
   $arg_path = $path_params['path'];
-  $user_id = substr($arg_path,6);
+  $user_id = substr($arg_path,15);
   $parts = explode("/",$user_id);
   $final_id = $parts['0'];
   $meeting_date = $form_state['values']['field_meeting_date']['und'][0]['value'];
