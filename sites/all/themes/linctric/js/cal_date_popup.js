@@ -33,10 +33,17 @@ $(document).ready(function() {
          $( "#dialog-form" ).dialog( "open" );
          $( '#dialog-form' ).load('/linctric/node/add/user-meeting?date='+date);
        }
+       else
+       { 
+         alert("Please select today's or future date(s) to make an appointment");
+       }
      }
    });
    
-   
+   $(".ui-dialog-titlebar-close").click(function(){
+     window.location.reload(true);
+    });
+        
     $('#user-meeting-node-form #edit-submit').click(function()
     {
        if($("#edit-field-meeting-date-und-0-value-datepicker-popup-0").val() == ''){
@@ -44,7 +51,7 @@ $(document).ready(function() {
        $('#edit-field-meeting-date-und-0-value-datepicker-popup-0').focus();
        return false;
        }
-              
+       
        if($('#edit-field-meeting-time-und').val() == '_none'){
        
        alert("please Select time");

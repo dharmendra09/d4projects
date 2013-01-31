@@ -58,12 +58,11 @@ try {
  $(document).ready(function() {
    $( "#dialog-form" ).dialog({
           autoOpen: false,
-          height: 350,
+          height: 450,
           width: 350,
           modal: true,
           resizable:false,
-          closeOnEscape:false,
-          
+          closeOnEscape:false,          
    });
 });
 </script>
