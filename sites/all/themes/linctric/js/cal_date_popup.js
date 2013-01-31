@@ -13,10 +13,10 @@ $(document).ready(function() {
   var urlId = pathArray[3];
   
   var uid = Drupal.settings.currentUser;
-  
+    
   $("td.past #request_accept_form #button_accept").attr("disabled","disabled");
   $("td.past #request_accept_form #button_denied").attr("disabled","disabled");
-  
+   
   $(".view-per-user-calendar .date-box td").hover(function(){
     $('.view-per-user-calendar .date-box .inner .day').css( 'cursor', 'pointer' );
   });
@@ -35,14 +35,16 @@ $(document).ready(function() {
        }
      }
    });
-
-   $(".ui-dialog-titlebar-close").click(function(){
-     window.location.reload(true);
-    });
-        
+   
+   
     $('#user-meeting-node-form #edit-submit').click(function()
     {
-       
+       if($("#edit-field-meeting-date-und-0-value-datepicker-popup-0").val() == ''){
+         alert("please Select date");
+       $('#edit-field-meeting-date-und-0-value-datepicker-popup-0').focus();
+       return false;
+       }
+              
        if($('#edit-field-meeting-time-und').val() == '_none'){
        
        alert("please Select time");
