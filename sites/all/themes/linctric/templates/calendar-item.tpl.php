@@ -1,4 +1,6 @@
 <?php
+
+
 /**
  * @file
  * Template to display view fields as a calendar item.
@@ -57,25 +59,26 @@ $index = 0;
   if(arg(2) == "calendar" && arg(3) == "month") { 
   $selecteduser = arg(1);
   global $user;
-  
   $current_user = $user->uid;
   $current_user_mail = $user->mail;
   $site_email = variable_get('site_mail', '');
   $meeting_date_response = $item->node->field_meeting_date['und'][0]['value'];
-  if($current_user && $current_user == $selecteduser ){   ?>
-   
-    <form action="" method="post" id="request_accept_form" >
-      <input type="submit" id="button_accept" value="Accept"></input>
-      <input type="hidden" name="button_pressed" id=<?php echo $meeting_date_response; ?> value=<?php echo $meeting_date_response; ?> />
-      <input type="submit" name="decline_pressed" id="button_denied" value="Decline"></input>
-    </form>
-    <?php } ?>
+  linctric_custom_email($item,$meeting_date_response);
+  linctric_custom_insert_value($item,$meeting_date_response);
+  $status = linctric_custom_select_value($item->node->nid);
   
-  <?php
-    linctric_custom_email($item,$meeting_date_response);
-  }  
-  ?> 
-    
+  if($current_user && $current_user == $selecteduser ){   ?>
+    <form action="" method="post" id="request_accept_form" >
+      <?php if($status->status == 'no') { ?>
+        <input type="submit" id="button_accept" value="Accept"></input>
+        
+        <input type="hidden" name="button_pressed" value=<?php echo $meeting_date_response; ?> />
+        <input type="hidden" name="button_pressed_nid" value=<?php echo $item->node->nid; ?> />
+        <input type="submit" name="decline_pressed" id="button_denied" value="Decline"></input>
+      <?php } ?>
+      
+    </form>
+    <?php } }?>
   </div>  
   <?php if (isset($item->continues) && $item->continues) : ?>
     <div class="continues">&raquo;</div>

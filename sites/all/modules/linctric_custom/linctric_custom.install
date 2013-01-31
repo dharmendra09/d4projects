@@ -7,22 +7,27 @@
 function linctric_custom_schema() {
   $schema['user_meeting'] = array(
     'fields' => array(
+      'nid' => array(
+        'description' => t('Node id'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'date' => array(
+        'description' => t('Date.'),
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
       'time' => array(
         'description' => t('Time.'),
         'type' => 'text',
         'not null' => TRUE,
       ),
-      'city' => array(
-        'description' => t('City/Region to meet other user.'),
-        'type' => 'text',
+      'status' => array(
+        'description' => t('Button Status'),
+        'type' => 'varchar',
+        'length' => '255',
         'not null' => TRUE,
       ),
-      'category' => array(
-        'description' => t('Type of meeting for ex.(tea,breakfast,discussion)'),
-        'type' => 'text',
-        'not null' => TRUE,
-      ),
-	  
     ),
     
   );

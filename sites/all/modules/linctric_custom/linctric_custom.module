@@ -44,20 +44,19 @@ function linctric_custom_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
-  
   if($form_id == 'user_meeting_node_form'){
             
     $node_id = $form['nid']['#value'];
     $form_action = $form['#action'];
        
-  if($form_action == '/linctric/node/'.$node_id.'/edit?destination=admin/content' || $form_action == '/linctric/node/'.$node_id.'/edit' ){
+    if($form_action == '/node/'.$node_id.'/edit?destination=admin/content' || $form_action == '/node/'.$node_id.'/edit' ){
       $form['#entity']->field_meeting_date['und'][0]['value'];
-  }
-  elseif($form_action == '/linctric/node/add/user-meeting'){}
-  else{
-  $selected_date = $_REQUEST['date'];
-    $form['field_meeting_date']['und'][0]['#default_value']['value'] = $selected_date;
-  }
+    }
+    elseif($form_action == '/node/add/user-meeting'){}
+    else{
+      $selected_date = $_REQUEST['date'];
+      $form['field_meeting_date']['und'][0]['#default_value']['value'] = $selected_date;
+    }
   
   $form['additional_settings']['#access'] = FALSE;
   $form['actions']['preview']['#access'] = FALSE;
@@ -74,6 +73,9 @@ function linctric_custom_user_meeting_node_form_validate($form, &$form_state){
    $meeting_time = $form_state['values']['field_meeting_time']['und'][0]['value'];
 }
 
+/**
+ * Implements submit_handler().
+ */
 function linctric_custom_submit_handler(&$form, &$form_state) {
       
   $browser_path = $_SERVER['HTTP_REFERER'];
@@ -82,15 +84,23 @@ function linctric_custom_submit_handler(&$form, &$form_state) {
   $user_id = substr($arg_path,6);
   $parts = explode("/",$user_id);
   $final_id = $parts['0'];
-  
-  
-  $user = user_load($final_id);
-  $username_url = $user->name;
-  $user_email = $user->mail;
   $meeting_date = $form_state['values']['field_meeting_date']['und'][0]['value'];
   $meeting_time = $form_state['values']['field_meeting_time']['und'][0]['value'];
   $region_value = $form_state['values']['field_city_region']['und'][0]['value'];
   $category_value = $form_state['values']['field_category']['und'][0]['value'];
+   
+  $nid = db_insert('user_meeting')
+    ->fields(array(
+      'nid' => $form_state['values']['nid'],
+      'date' => $meeting_date,
+      'time' => $meeting_time,
+      'status' => 'no',
+      ))
+    ->execute();
+    
+  $user = user_load($final_id);
+  $username_url = $user->name;
+  $user_email = $user->mail;
   
   global $user;
   $loggedin_user_email = $user->mail;
@@ -119,21 +129,26 @@ function linctric_custom_submit_handler(&$form, &$form_state) {
   drupal_set_message('E-mail has been sent successfully');
 }
 
+/**
+ * Implements custom email().
+ */
 function linctric_custom_email($item,$meeting_date_response){
+  
   global $user;
   $req_user_id = $item->node->uid;
+  $mail_node_id = $item->node->nid; 
   $req_user = user_load($req_user_id);
   $req_user_name = $req_user->name;
   $req_user_email = $req_user->mail;
   $logged_user_name = $user->name;
   $site_email = variable_get('site_mail', '');
-       
-  if(isset($_POST['button_pressed']) && $_POST['button_pressed'] == $meeting_date_response){
+         
+  if(isset($_POST['button_pressed']) && $_POST['button_pressed'] == $meeting_date_response && $_POST['button_pressed_nid'] == $mail_node_id ){
          
   /* E-mail Code */
   $to      = $req_user_email;
   $subject = 'Regarding Your Request';
-  if(isset($_POST['decline_pressed'])){
+  if(isset($_POST['decline_pressed']) && $_POST['button_pressed_nid'] == $mail_node_id){
   $message = 'Hello '.$req_user_name.' '.$logged_user_name .' has not accepted your request for date '.$meeting_date_response."\n".
              'Thanks & Regards'."\n".
              'Linctric team';
@@ -147,4 +162,58 @@ function linctric_custom_email($item,$meeting_date_response){
   
   mail($to, $subject, $message, $headers);
   }
+}
+
+/**
+ * Implements insert value().
+ */
+function linctric_custom_insert_value($item,$meeting_date_response){
+  $m_node_id = $item->node->nid;
+  $m_date = $item->node->field_meeting_date['und'][0]['value'];
+  $m_time = $item->node->field_meeting_time['und'][0]['value'];
+  $accept_status = 'yes';
+  $decline_status = 'no';
+  $stat_id = linctric_custom_select_value($m_node_id);
+  if(empty($stat_id)){
+    $nid = db_insert('user_meeting')
+    ->fields(array(
+      'nid' => $m_node_id,
+      'date' => $m_date,
+      'time' =>$m_time,
+      'status' => 'no',
+      ))
+    ->execute();
+   
+  }
+  if(isset($_POST['button_pressed']) && $_POST['button_pressed'] == $meeting_date_response) {
+    $url_nid = $_POST['button_pressed_nid'];
+    if(isset($_POST['decline_pressed'])) {
+      $nid = db_update('user_meeting')
+        ->fields(array(
+          'status' => 'denied',
+        ))
+      ->condition('user_meeting.nid', $url_nid, '=')
+      ->execute();  
+    }
+    else {
+      $nid = db_update('user_meeting')
+        ->fields(array(
+          'status' => 'yes',
+        ))
+      ->condition('user_meeting.nid', $url_nid, '=')
+      ->execute();
+    }
+  }
+}
+
+/**
+ * Implements select value().
+ */
+
+function linctric_custom_select_value($node_id) {
+  $query = db_select('user_meeting', 'um');
+  $query->condition('um.nid', $node_id);
+  $query->fields('um',array ('nid','status'));
+  $result = $query->execute()->fetchObject();
+  return $result; 
 }

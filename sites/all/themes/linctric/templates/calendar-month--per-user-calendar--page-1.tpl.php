@@ -63,8 +63,9 @@ try {
           modal: true,
           resizable:false,
           closeOnEscape:false,
+          
    });
 });
 </script>
 
-<div id="dialog-form"></div>
+<div id="dialog-form" title="Make an Appointment"></div>
