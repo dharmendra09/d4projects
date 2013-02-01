@@ -46,30 +46,31 @@ $(document).ready(function() {
         
     $('#user-meeting-node-form #edit-submit').click(function()
     {
-       if($("#edit-field-meeting-date-und-0-value-datepicker-popup-0").val() == ''){
-         alert("please Select date");
-       $('#edit-field-meeting-date-und-0-value-datepicker-popup-0').focus();
-       return false;
+        if($("#edit-field-meeting-date-und-0-value-datepicker-popup-0").val() == ''){
+         $("#edit-field-meeting-date-und-0-value-datepicker-popup-0").addClass('error');
+         return false;
+       }else{
+         $("#edit-field-meeting-date-und-0-value-datepicker-popup-0").removeClass('error');
        }
        
        if($('#edit-field-meeting-time-und').val() == '_none'){
-       
-       alert("please Select time");
-       $('#edit-field-meeting-time-und').focus();
-       return false;
+       $("#edit-field-meeting-time-und").addClass('error');
+         return false;
+       }else{
+         $("#edit-field-meeting-time-und").removeClass('error');
        }
               
        if($('#edit-field-city-region-und-0-value').val() == ''){
-       
-       alert("Please Enter Region Value");
-       $('#edit-field-city-region-und-0-value').focus();
-       return false;
+       $("#edit-field-city-region-und-0-value").addClass('error');
+         return false;
+       }else{
+         $("#edit-field-city-region-und-0-value").removeClass('error');
        }
        if($('#edit-field-category-und-0-value').val() == ''){
-       
-       alert("Please Enter Catagory Value");
-       $('#edit-field-category-und-0-value').focus();
-       return false;
+       $("#edit-field-category-und-0-value").addClass('error');
+         return false;
+       }else{
+         $("#edit-field-category-und-0-value").removeClass('error');
        }
         
     });
