@@ -899,5 +899,5 @@ a {
 
 .form-field-type-user-reference {display:none;}
 
-
-
+.view-users-list a {text-decoration:none; }
+.view-users-list a.active {color:#CF0001;}
