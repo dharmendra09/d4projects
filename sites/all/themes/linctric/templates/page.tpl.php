@@ -157,7 +157,7 @@
     </div><!-- /#content -->
 
     <div id="navigation">
-      
+      <?php print test; ?>
       <?php print render($page['navigation']); ?>
 
     </div><!-- /#navigation -->
